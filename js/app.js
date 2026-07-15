@@ -75,11 +75,12 @@ function converterFormulario(evento) {
         selectDestino.value
     );
 
-    campoResultado.textContent =
-        `${formatarResultado(validacao.valor)} ` +
-        `${obterNomeUnidade(selectOrigem.value)} equivalem a ` +
-        `${formatarResultado(resultado)} ` +
-        `${obterNomeUnidade(selectDestino.value)}.`;
+    campoResultado.textContent = criarDescricaoConversao(
+        validacao.valor,
+        resultado,
+        selectOrigem.value,
+        selectDestino.value
+    );
 }
 
 function limparResultado() {
