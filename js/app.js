@@ -22,4 +22,36 @@ function carregarUnidades() {
   selectDestino.value = "cm";
 }
 
+function validarValor(valorInformado) {
+  const texto = String(valorInformado).trim();
+
+  if (texto === "") {
+    return {
+      valido: false,
+      mensagem: "Informe um valor para converter."
+    };
+  }
+
+  const valor = Number(texto.replace(",", "."));
+
+  if (!Number.isFinite(valor)) {
+    return {
+      valido: false,
+      mensagem: "Digite um número válido."
+    };
+  }
+
+  if (valor < 0) {
+    return {
+      valido: false,
+      mensagem: "O valor não pode ser negativo."
+    };
+  }
+
+  return {
+    valido: true,
+    valor
+  };
+}
+
 carregarUnidades();
