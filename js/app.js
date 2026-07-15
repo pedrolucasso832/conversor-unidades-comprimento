@@ -1,7 +1,11 @@
 "use strict";
 
+const formulario = document.getElementById("conversion-form");
+const campoValor = document.getElementById("value");
 const selectOrigem = document.getElementById("from-unit");
 const selectDestino = document.getElementById("to-unit");
+const botaoLimpar = document.getElementById("clear-button");
+const campoResultado = document.getElementById("result");
 
 function carregarUnidades() {
   selectOrigem.innerHTML = "";
@@ -53,5 +57,31 @@ function validarValor(valorInformado) {
     valor
   };
 }
+
+function converterFormulario(evento) {
+  evento.preventDefault();
+
+  const validacao = validarValor(campoValor.value);
+
+  if (!validacao.valido) {
+    campoResultado.textContent = validacao.mensagem;
+    return;
+  }
+
+  const resultado = converterComprimento(
+    validacao.valor,
+    selectOrigem.value,
+    selectDestino.value
+  );
+
+  campoResultado.textContent = formatarResultado(resultado);
+}
+
+function limparResultado() {
+  campoResultado.textContent = "Informe os dados e clique em converter.";
+}
+
+formulario.addEventListener("submit", converterFormulario);
+botaoLimpar.addEventListener("click", limparResultado);
 
 carregarUnidades();
