@@ -57,3 +57,13 @@ function converterComprimento(
 
     return valorEmMetros / destino.fatorEmMetros;
 }
+
+function formatarResultado(valor) {
+    return new Intl.NumberFormat("pt-BR", {
+        maximumFractionDigits: 8
+    }).format(valor);
+}
+
+function obterNomeUnidade(codigo) {
+    return UNIDADES_COMPRIMENTO[codigo]?.nome ?? codigo;
+}
