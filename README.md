@@ -34,3 +34,14 @@ Projeto desenvolvido para realizar conversões entre diferentes unidades de comp
 3. Abra o arquivo `index.html` em um navegador.
 
 O projeto é executado diretamente no navegador e não requer a instalação de dependências.
+
+## Testes manuais
+
+Os seguintes testes podem ser realizados para validar as conversões:
+
+| Valor informado | Unidade de origem | Unidade de destino | Resultado esperado |
+|---:|---|---|---:|
+| 1 | Metro | Centímetro | 100 centímetros |
+| 1 | Quilômetro | Metro | 1000 metros |
+| 1 | Milha | Quilômetro | 1,609344 quilômetros |
+| 12 | Polegada | Pé | 1 pé |
