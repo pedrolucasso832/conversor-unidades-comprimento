@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Conversor de Comprimento</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="js/converter.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+
+<body>
+    <header class="header-form">
+        <h1>Conversor de Comprimento</h1>
+
+        <p>
+            Converta valores entre metros, quilômetros,
+            centímetros, milhas, polegadas e outras unidades.
+        </p>
+    </header>
+
+    <main>
+        <form id="converter-form">
+            <label for="valor">Valor</label>
+
+            <input
+                type="number"
+                id="valor"
+                placeholder="Digite um valor"
+                min="0"
+                step="any"
+            >
+
+            <label for="unidade-origem">De</label>
+
+            <select id="unidade-origem"></select>
+
+            <label for="unidade-destino">Para</label>
+
+            <select id="unidade-destino"></select>
+
+            <div class="actions">
+                <button type="submit">
+                    Converter
+                </button>
+
+                <button type="button" id="limpar">
+                    Limpar
+                </button>
+            </div>
+        </form>
+
+        <p id="mensagem-erro" role="alert"></p>
+
+        <section id="result-area">
+            <h2>Resultado</h2>
+
+            <p id="resultado" aria-live="polite">
+                Informe os dados e clique em converter.
+            </p>
+        </section>
+    </main>
+</body>
+</html>
