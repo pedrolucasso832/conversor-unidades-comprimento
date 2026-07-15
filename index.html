@@ -1,56 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conversor de Comprimento</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Comprimento</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <main>
-    <h1>Conversor de Comprimento</h1>
-    <p>Converta valores entre metros, quilômetros, centímetros, milhas, polegadas e outras unidades.</p>
+    <header class="header-form">
+        <h1>Conversor de Comprimento</h1>
+        <p>Converta valores entre metros, quilômetros, centímetros, milhas, polegadas e outras unidades.</p>
+    </header>
+    
+    <main>
+        <form id="conversion-form">
+            <label for="value">Valor</label>
+            <input type="number" id="value" placeholder="Digite um valor" step="any">
 
-    <form id="conversion-form">
-      <label for="value">Valor</label>
-      <input type="number" id="value" placeholder="Digite um valor" step="any">
+            <label for="from-unit">De</label>
+            <select id="from-unit">
+                <option value="metro">Metro</option>
+                <option value="quilometro">Quilômetro</option>
+                <option value="centimetro">Centímetro</option>
+                <option value="milimetro">Milímetro</option>
+                <option value="milha">Milha</option>
+                <option value="polegada">Polegada</option>
+                <option value="pe">Pé</option>
+                <option value="jarda">Jarda</option>
+            </select>
 
-      <label for="from-unit">De</label>
-      <select id="from-unit">
-        <option value="metro">Metro</option>
-        <option value="quilometro">Quilômetro</option>
-        <option value="centimetro">Centímetro</option>
-        <option value="milimetro">Milímetro</option>
-        <option value="milha">Milha</option>
-        <option value="polegada">Polegada</option>
-        <option value="pe">Pé</option>
-        <option value="jarda">Jarda</option>
-      </select>
+            <label for="to-unit">Para</label>
+            <select id="to-unit">
+                <option value="metro">Metro</option>
+                <option value="quilometro">Quilômetro</option>
+                <option value="centimetro">Centímetro</option>
+                <option value="milimetro">Milímetro</option>
+                <option value="milha">Milha</option>
+                <option value="polegada">Polegada</option>
+                <option value="pe">Pé</option>
+                <option value="jarda">Jarda</option>
+            </select>
 
-      <label for="to-unit">Para</label>
-      <select id="to-unit">
-        <option value="metro">Metro</option>
-        <option value="quilometro">Quilômetro</option>
-        <option value="centimetro">Centímetro</option>
-        <option value="milimetro">Milímetro</option>
-        <option value="milha">Milha</option>
-        <option value="polegada">Polegada</option>
-        <option value="pe">Pé</option>
-        <option value="jarda">Jarda</option>
-      </select>
+            <div class="actions">
+                <button type="submit">Converter</button>
+                <button type="reset" id="clear-button">Limpar</button>
+            </div>
+        </form>
 
-      <div class="actions">
-        <button type="submit">Converter</button>
-        <button type="reset" id="clear-button">Limpar</button>
-      </div>
-    </form>
+        <section id="result-area">
+            <h2>Resultado</h2>
+            <p id="result">Informe os dados e clique em converter.</p>
+        </section>
+    </main>
 
-    <section id="result-area">
-      <h2>Resultado</h2>
-      <p id="result">Informe os dados e clique em converter.</p>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>
