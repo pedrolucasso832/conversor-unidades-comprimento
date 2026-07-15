@@ -39,3 +39,21 @@ const UNIDADES_COMPRIMENTO = {
         fatorEmMetros: 1609.344
     }
 };
+
+function converterComprimento(
+    valor,
+    unidadeOrigem,
+    unidadeDestino
+) {
+    const origem = UNIDADES_COMPRIMENTO[unidadeOrigem];
+    const destino = UNIDADES_COMPRIMENTO[unidadeDestino];
+
+    if (!origem || !destino) {
+        throw new Error("Unidade de comprimento inválida.");
+    }
+
+    const valorEmMetros =
+        valor * origem.fatorEmMetros;
+
+    return valorEmMetros / destino.fatorEmMetros;
+}
