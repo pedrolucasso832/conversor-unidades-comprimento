@@ -83,13 +83,16 @@ function exibirErro(mensagem) {
     campoResultado.textContent =
         "Não foi possível realizar a conversão.";
 
+    campoValor.setAttribute("aria-invalid", "true");
     definirEstadoVisual("erro");
+    campoValor.focus();
 }
 
 function exibirResultado(mensagem) {
     mensagemErro.textContent = "";
     campoResultado.textContent = mensagem;
 
+    campoValor.setAttribute("aria-invalid", "false");
     definirEstadoVisual("sucesso");
 }
 
@@ -124,14 +127,40 @@ function limparResultado() {
     campoResultado.textContent =
         "Informe os dados e clique em converter.";
 
+    campoValor.setAttribute("aria-invalid", "false");
     definirEstadoVisual("inicial");
     selectOrigem.value = "m";
     selectDestino.value = "cm";
     campoValor.focus();
 }
 
+function limparErroAoDigitar() {
+    if (mensagemErro.textContent === "") {
+        return;
+    }
+
+    mensagemErro.textContent = "";
+    campoResultado.textContent =
+        "Informe os dados e clique em converter.";
+
+    campoValor.setAttribute("aria-invalid", "false");
+    definirEstadoVisual("inicial");
+}
+
+function converterComEnter(evento) {
+    if (evento.key !== "Enter") {
+        return;
+    }
+
+    evento.preventDefault();
+    formulario.requestSubmit();
+}
+
 formulario.addEventListener("submit", converterFormulario);
 botaoLimpar.addEventListener("click", limparResultado);
+campoValor.addEventListener("input", limparErroAoDigitar);
+campoValor.addEventListener("keydown", converterComEnter);
 
 carregarUnidades();
 definirEstadoVisual("inicial");
+campoValor.focus();
