@@ -5,6 +5,8 @@ const campoValor = document.getElementById("valor");
 const selectOrigem = document.getElementById("unidade-origem");
 const selectDestino = document.getElementById("unidade-destino");
 const botaoLimpar = document.getElementById("limpar");
+const mensagemErro = document.getElementById("mensagem-erro");
+const areaResultado = document.getElementById("result-area");
 const campoResultado = document.getElementById("resultado");
 
 function carregarUnidades() {
@@ -59,13 +61,48 @@ function validarValor(valorInformado) {
     };
 }
 
+function definirEstadoVisual(estado) {
+    areaResultado.classList.toggle(
+        "estado-sucesso",
+        estado === "sucesso"
+    );
+
+    areaResultado.classList.toggle(
+        "estado-erro",
+        estado === "erro"
+    );
+
+    mensagemErro.classList.toggle(
+        "error",
+        estado === "erro"
+    );
+}
+
+function exibirErro(mensagem) {
+    mensagemErro.textContent = mensagem;
+    campoResultado.textContent =
+        "Não foi possível realizar a conversão.";
+
+    campoValor.setAttribute("aria-invalid", "true");
+    definirEstadoVisual("erro");
+    campoValor.focus();
+}
+
+function exibirResultado(mensagem) {
+    mensagemErro.textContent = "";
+    campoResultado.textContent = mensagem;
+
+    campoValor.setAttribute("aria-invalid", "false");
+    definirEstadoVisual("sucesso");
+}
+
 function converterFormulario(evento) {
     evento.preventDefault();
 
     const validacao = validarValor(campoValor.value);
 
     if (!validacao.valido) {
-        campoResultado.textContent = validacao.mensagem;
+        exibirErro(validacao.mensagem);
         return;
     }
 
@@ -75,23 +112,55 @@ function converterFormulario(evento) {
         selectDestino.value
     );
 
-    campoResultado.textContent =
-        `${formatarResultado(validacao.valor)} ` +
-        `${obterNomeUnidade(selectOrigem.value)} equivalem a ` +
-        `${formatarResultado(resultado)} ` +
-        `${obterNomeUnidade(selectDestino.value)}.`;
+    const descricao = criarDescricaoConversao(
+        validacao.valor,
+        resultado,
+        selectOrigem.value,
+        selectDestino.value
+    );
+
+    exibirResultado(descricao);
 }
 
 function limparResultado() {
+    mensagemErro.textContent = "";
     campoResultado.textContent =
         "Informe os dados e clique em converter.";
 
+    campoValor.setAttribute("aria-invalid", "false");
+    definirEstadoVisual("inicial");
     selectOrigem.value = "m";
     selectDestino.value = "cm";
     campoValor.focus();
 }
 
+function limparErroAoDigitar() {
+    if (mensagemErro.textContent === "") {
+        return;
+    }
+
+    mensagemErro.textContent = "";
+    campoResultado.textContent =
+        "Informe os dados e clique em converter.";
+
+    campoValor.setAttribute("aria-invalid", "false");
+    definirEstadoVisual("inicial");
+}
+
+function converterComEnter(evento) {
+    if (evento.key !== "Enter") {
+        return;
+    }
+
+    evento.preventDefault();
+    formulario.requestSubmit();
+}
+
 formulario.addEventListener("submit", converterFormulario);
 botaoLimpar.addEventListener("click", limparResultado);
+campoValor.addEventListener("input", limparErroAoDigitar);
+campoValor.addEventListener("keydown", converterComEnter);
 
 carregarUnidades();
+definirEstadoVisual("inicial");
+campoValor.focus();

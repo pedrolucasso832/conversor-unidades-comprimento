@@ -17,16 +17,16 @@
 </head>
 
 <body>
-    <header class="header-form">
-        <h1>Conversor de Comprimento</h1>
+    <main class="card">
+        <header class="header-form">
+            <h1>Conversor de Comprimento</h1>
 
-        <p>
-            Converta valores entre metros, quilômetros,
-            centímetros, milhas, polegadas e outras unidades.
-        </p>
-    </header>
+            <p>
+                Converta valores entre metros, quilômetros,
+                centímetros, milhas, polegadas e outras unidades.
+            </p>
+        </header>
 
-    <main>
         <form id="converter-form">
             <label for="valor">Valor</label>
 
@@ -59,10 +59,10 @@
 
         <p id="mensagem-erro" role="alert"></p>
 
-        <section id="result-area">
-            <h2>Resultado</h2>
+        <section id="result-area" class="result-card">
+            <span class="result-label">Resultado da conversão:</span>
 
-            <p id="resultado" aria-live="polite">
+            <p id="resultado" class="result-value" aria-live="polite">
                 Informe os dados e clique em converter.
             </p>
         </section>

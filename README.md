@@ -45,3 +45,13 @@ Os seguintes testes podem ser realizados para validar as conversões:
 | 1 | Quilômetro | Metro | 1000 metros |
 | 1 | Milha | Quilômetro | 1,609344 quilômetros |
 | 12 | Polegada | Pé | 1 pé |
+
+## Versões do projeto
+
+### v1.0.0 — Versão funcional
+
+Primeira versão funcional do conversor, com estrutura simples e suporte à conversão entre diferentes unidades de comprimento.
+
+### v1.1.0 — Versão visual
+
+Versão com identidade visual melhorada, layout responsivo, cartão com sombra, botões aprimorados, estados de foco e diferenciação visual entre resultados corretos e mensagens de erro.
