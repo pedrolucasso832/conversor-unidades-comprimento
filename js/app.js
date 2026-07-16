@@ -5,6 +5,8 @@ const campoValor = document.getElementById("valor");
 const selectOrigem = document.getElementById("unidade-origem");
 const selectDestino = document.getElementById("unidade-destino");
 const botaoLimpar = document.getElementById("limpar");
+const mensagemErro = document.getElementById("mensagem-erro");
+const areaResultado = document.getElementById("result-area");
 const campoResultado = document.getElementById("resultado");
 
 function carregarUnidades() {
@@ -59,13 +61,45 @@ function validarValor(valorInformado) {
     };
 }
 
+function definirEstadoVisual(estado) {
+    areaResultado.classList.toggle(
+        "estado-sucesso",
+        estado === "sucesso"
+    );
+
+    areaResultado.classList.toggle(
+        "estado-erro",
+        estado === "erro"
+    );
+
+    mensagemErro.classList.toggle(
+        "error",
+        estado === "erro"
+    );
+}
+
+function exibirErro(mensagem) {
+    mensagemErro.textContent = mensagem;
+    campoResultado.textContent =
+        "Não foi possível realizar a conversão.";
+
+    definirEstadoVisual("erro");
+}
+
+function exibirResultado(mensagem) {
+    mensagemErro.textContent = "";
+    campoResultado.textContent = mensagem;
+
+    definirEstadoVisual("sucesso");
+}
+
 function converterFormulario(evento) {
     evento.preventDefault();
 
     const validacao = validarValor(campoValor.value);
 
     if (!validacao.valido) {
-        campoResultado.textContent = validacao.mensagem;
+        exibirErro(validacao.mensagem);
         return;
     }
 
@@ -75,18 +109,22 @@ function converterFormulario(evento) {
         selectDestino.value
     );
 
-    campoResultado.textContent = criarDescricaoConversao(
+    const descricao = criarDescricaoConversao(
         validacao.valor,
         resultado,
         selectOrigem.value,
         selectDestino.value
     );
+
+    exibirResultado(descricao);
 }
 
 function limparResultado() {
+    mensagemErro.textContent = "";
     campoResultado.textContent =
         "Informe os dados e clique em converter.";
 
+    definirEstadoVisual("inicial");
     selectOrigem.value = "m";
     selectDestino.value = "cm";
     campoValor.focus();
@@ -96,3 +134,4 @@ formulario.addEventListener("submit", converterFormulario);
 botaoLimpar.addEventListener("click", limparResultado);
 
 carregarUnidades();
+definirEstadoVisual("inicial");
